@@ -4,26 +4,33 @@ const Schema = mongoose.Schema;
 function formatDate(date) {
   return date.toLocaleDateString();
 }
-const reaction = new Schema({
-  reactionId: {
-    type: mongoose.Types.ObjectId,
-    default: mongoose.Types.ObjectId(),
+const reaction = new Schema(
+  {
+    reactionId: {
+      type: mongoose.Types.ObjectId,
+      default: mongoose.Types.ObjectId(),
+    },
+    reactionBody: {
+      type: String,
+      required: true,
+      maxLength: 280,
+    },
+    username: {
+      type: String,
+      required: true,
+    },
+    createdAt: {
+      type: Date,
+      default: new Date(),
+      get: formatDate,
+    },
   },
-  reactionBody: {
-    type: String,
-    required: true,
-    maxLength: 280,
-  },
-  username: {
-    type: String,
-    required: true,
-  },
-  createdAt: {
-    type: Date,
-    default: new Date(),
-    get: formatDate,
-  },
-});
+  {
+    toJSON: {
+      getters: true,
+    },
+  }
+);
 
 const thoughtSchema = new Schema(
   {
@@ -47,6 +54,7 @@ const thoughtSchema = new Schema(
   {
     toJSON: {
       virtuals: true,
+      getters: true,
     },
   }
 );
