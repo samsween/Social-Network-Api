@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
-
+const dayjs = require("dayjs");
 const Schema = mongoose.Schema;
 function formatDate(date) {
-  return date.toLocaleDateString();
+  return dayjs(date).format("MM/DD/YYYY - hh:mm A");
 }
 const reaction = new Schema(
   {
