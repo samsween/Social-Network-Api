@@ -13,7 +13,6 @@ module.exports = {
       .sort({ _id: -1 })
       .then((dbThoughtData) => res.json(dbThoughtData))
       .catch((err) => {
-        console.log(err);
         res.status(400).json(err);
       });
   },
@@ -34,14 +33,13 @@ module.exports = {
         res.json(dbThoughtData);
       })
       .catch((err) => {
-        console.log(err);
         res.status(400).json(err);
       });
   },
   // createThought
   createThought({ body }, res) {
     const { thoughtText, username, userId } = body;
-    Thought.create(thoughtText, username)
+    Thought.create({ thoughtText, username })
       .then((dbThoughtData) => {
         User.findOneAndUpdate(
           userId,
