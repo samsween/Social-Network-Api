@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/samsween/Social-Network-Api#readme",
   "dependencies": {
+    "axios": "^1.3.4",
     "dayjs": "^1.11.7",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
