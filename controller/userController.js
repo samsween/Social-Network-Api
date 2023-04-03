@@ -1,3 +1,4 @@
+const Thought = require("../models/Thought");
 const User = require("../models/User");
 
 module.exports = {
@@ -69,7 +70,9 @@ module.exports = {
           res.status(404).json({ message: "No user found with this id!" });
           return;
         }
-        res.json(dbUserData);
+        Thought.deleteMany({ _id: { $in: dbUserData.thoughts } }).then(() => {
+          res.json(dbUserData);
+        });
       })
       .catch((err) => res.status(400).json(err));
   },
